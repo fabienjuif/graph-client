@@ -1,4 +1,7 @@
 # @fabienjuif/graph-client
+> light zero dependency graphql-client, supporting cache and SSR
+
+![CircleCI](https://img.shields.io/circleci/build/github/fabienjuif/graph-client.svg) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@fabienjuif/graph-client.svg) ![npm (scoped)](https://img.shields.io/npm/v/@fabienjuif/graph-client.svg) ![GitHub](https://img.shields.io/github/license/fabienjuif/graph-client.svg)
 
 ## Features
 - Light (bundlesize)
