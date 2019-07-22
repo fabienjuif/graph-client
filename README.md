@@ -7,6 +7,8 @@
 - Light (bundlesize)
 - Supports browser and Node (SSR compatible)
 - Supports cache (via third party library, or your own code)
+ * cache is not used for mutations
+ * cache can be disabled per request
 
 ## Install
 `npm install --save @fabienjuif/graph-client`
@@ -86,4 +88,44 @@ query GetUser($id: String!) {
 
 graphql(QUERY, { id: '2' })
   .then(data => console.log(data))
+```
+
+## Disable cache for specific queries
+```js
+import createClient from '@fabienjuif/graph-client'
+
+const graphql = createClient({
+  url: 'https://my-domain/graphql',
+  cache: new Map(),
+})
+
+const CACHED_QUERY = `
+query GetUser($id: String!) {
+  user (id: $id) {
+    id
+    name
+    email
+  }
+}
+`
+
+// this request will be cached
+graphql(CACHED_QUERY, { id: '2' })
+  .then(data => console.log(data))
+
+const QUERY = `
+query GetTopics($max: Int!) {
+  topics (max: $max) {
+    id
+    title
+  }
+}
+`
+
+// this request will NOT be cached because we ask not to use it in request scope
+// even if the cache is specified in the factory
+graphql(QUERY, { max: 10 }, { noCache: true })
+  .then(data => console.log(data))
+
+
 ```

@@ -18,11 +18,16 @@ const client = (options = {}) => {
     throw new Error('You must provide an API URL (options.url).')
   }
 
-  return async (query, variables) => {
+  return async (query, variables, queryOptions = {}) => {
     const body = JSON.stringify({ query, variables })
+    const {
+      noCache = false,
+    } = queryOptions
 
-    const data = cache ? cache.get(body) : undefined
-    if (data) return data
+    if (!noCache) {
+      const data = cache ? cache.get(body) : undefined
+      if (data) return data
+    }
 
     return new Promise((resolve, reject) => {
       fetch(
@@ -46,7 +51,7 @@ const client = (options = {}) => {
             return
           }
 
-          if (cache && !query.trim().startsWith('mutation')) cache.set(body, res.data)
+          if (!noCache && cache && !query.trim().startsWith('mutation')) cache.set(body, res.data)
           resolve(res.data)
         })
     })
