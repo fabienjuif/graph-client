@@ -182,3 +182,23 @@ it('should be possible to override the error logger [object]', async () => {
   }
   expect(error).toBeTruthy()
 })
+
+
+it('should not use cache for mutations', async () => {
+  const json = jest.fn(() => Promise.resolve({ data: { addUser: { id: '3' } } }))
+  const fetch = jest.fn(() => Promise.resolve({ json }))
+  const cache = new Map()
+  const graphql = createClient({
+    fetch,
+    url: 'http://localhost/graphql',
+  })
+
+  const QUERY = `mutation AddUser ($user: InputUser!) {
+    addUser (user: $user) {
+      id
+    }
+  }`
+  const res = await graphql(QUERY, { id: '3', name: 'test' })
+  expect(res.addUser).toEqual({ id: '3' })
+  expect(cache.size).toEqual(0)
+})

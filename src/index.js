@@ -46,7 +46,7 @@ const client = (options = {}) => {
             return
           }
 
-          if (cache) cache.set(body, res.data)
+          if (cache && !query.trim().startsWith('mutation')) cache.set(body, res.data)
           resolve(res.data)
         })
     })
