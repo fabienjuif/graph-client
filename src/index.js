@@ -44,7 +44,7 @@ const client = (options = {}) => {
       const call = ({ token: innerToken = undefined } = {}) => {
         const callHeaders = {
           'content-type': 'application/json',
-          ...headers,
+          ...innerHeaders,
         }
 
         if (innerToken) callHeaders.authorization = `Bearer ${innerToken}`
