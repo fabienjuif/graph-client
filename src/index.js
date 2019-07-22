@@ -90,7 +90,7 @@ const client = (options = {}) => {
 
   return Object.assign(
     graphql,
-    setHeaders,
+    { setHeaders },
   )
 }
 
