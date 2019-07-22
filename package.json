@@ -1,6 +1,6 @@
 {
   "name": "@fabienjuif/graph-client",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "light zero dependency graphql-client, supporting cache and SSR",
   "license": "MIT",
   "esnext": "pkg/dist-src/index.js",
