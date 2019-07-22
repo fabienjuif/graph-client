@@ -62,3 +62,25 @@ const run = async () => {
   console.log(user3)
 }
 ```
+
+## Usage minimum options
+```js
+import createClient from '@fabienjuif/graph-client'
+
+const graphql = createClient({
+  url: 'https://my-domain/graphql',
+})
+
+const QUERY = `
+query GetUser($id: String!) {
+  user (id: $id) {
+    id
+    name
+    email
+  }
+}
+`
+
+graphql(QUERY, { id: '2' })
+  .then(data => console.log(data))
+```

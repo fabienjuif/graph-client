@@ -1,4 +1,4 @@
-const client = (options) => {
+const client = (options = {}) => {
   const {
     cache = undefined,
     url = undefined,
