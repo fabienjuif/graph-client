@@ -7,13 +7,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - cache-{{ checksum "yarn.lock" }}
+          - cache-v2-{{ checksum "yarn.lock" }}
       - run: yarn
       - save_cache:
           paths:
-            - node_modules
             - ~/.cache/yarn
-          key: cache-{{ checksum "yarn.lock" }}
+          key: cache-v2-{{ checksum "yarn.lock" }}
       - run: yarn lint
       - run: yarn jest --coverage && cat ./coverage/lcov.info | yarn coveralls
 
