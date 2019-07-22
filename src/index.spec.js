@@ -225,9 +225,104 @@ it('should not use cache if asked for it', async () => {
   expect(cache.size).toEqual(0)
 })
 
-it.todo('should set headers')
-it.todo('should override headers [string]')
-it.todo('should override headers [object]')
+it('should set headers', async () => {
+  const json = jest.fn(() => Promise.resolve({ data: { user: { id: '3', name: 'test' } } }))
+  const fetch = jest.fn(() => Promise.resolve({ json }))
+  const headers = {
+    my: 'custom',
+    header: true,
+  }
+  const graphql = createClient({
+    fetch,
+    url: 'http://localhost/graphql',
+    headers,
+  })
+
+  const QUERY = `query GetUser ($id: String!) {
+    user (id: $id) {
+      id
+      name
+    }
+  }`
+
+  const res = await graphql(QUERY, { id: '3' }, { noCache: true })
+  expect(res.user).toEqual({ id: '3', name: 'test' })
+  expect(fetch).toHaveBeenCalledWith(
+    'http://localhost/graphql',
+    expect.objectContaining({
+      headers: expect.objectContaining(headers),
+    }),
+  )
+})
+
+it('should override headers [object]', async () => {
+  const json = jest.fn(() => Promise.resolve({ data: { user: { id: '3', name: 'test' } } }))
+  const fetch = jest.fn(() => Promise.resolve({ json }))
+  const graphql = createClient({
+    fetch,
+    url: 'http://localhost/graphql',
+  })
+
+  const QUERY = `query GetUser ($id: String!) {
+    user (id: $id) {
+      id
+      name
+    }
+  }`
+
+  const headers = {
+    my: 'custom',
+    header: true,
+  }
+  graphql.setHeaders(headers)
+
+  const res = await graphql(QUERY, { id: '3' }, { noCache: true })
+  expect(res.user).toEqual({ id: '3', name: 'test' })
+  expect(fetch).toHaveBeenCalledWith(
+    'http://localhost/graphql',
+    expect.objectContaining({
+      headers: expect.objectContaining(headers),
+    }),
+  )
+})
+
+it('should override headers [function]', async () => {
+  const json = jest.fn(() => Promise.resolve({ data: { user: { id: '3', name: 'test' } } }))
+  const fetch = jest.fn(() => Promise.resolve({ json }))
+  const headers = {
+    my: 'custom',
+    header: true,
+  }
+  const graphql = createClient({
+    fetch,
+    url: 'http://localhost/graphql',
+    headers,
+  })
+
+  const QUERY = `query GetUser ($id: String!) {
+    user (id: $id) {
+      id
+      name
+    }
+  }`
+
+  graphql.setHeaders(oldHeaders => ({
+    ...oldHeaders,
+    new: 'header',
+  }))
+
+  const res = await graphql(QUERY, { id: '3' }, { noCache: true })
+  expect(res.user).toEqual({ id: '3', name: 'test' })
+  expect(fetch).toHaveBeenCalledWith(
+    'http://localhost/graphql',
+    expect.objectContaining({
+      headers: expect.objectContaining({
+        ...headers,
+        new: 'header',
+      }),
+    }),
+  )
+})
 
 it('should provide token [string]', async () => {
   const json = jest.fn(() => Promise.resolve({ data: { user: { id: '3', name: 'test' } } }))
