@@ -7,8 +7,8 @@
 - Light (bundlesize)
 - Supports browser and Node (SSR compatible)
 - Supports cache (via third party library, or your own code)
- * cache is not used for mutations
- * cache can be disabled per request
+  * cache is not used for mutations
+  * cache can be disabled per request with `noCache: true` option
 
 ## Install
 `npm install --save @fabienjuif/graph-client`
