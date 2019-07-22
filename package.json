@@ -1,6 +1,6 @@
 {
   "name": "@fabienjuif/graph-client",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "light zero dependency graphql-client, supporting cache and SSR",
   "license": "MIT",
   "esnext": "pkg/dist-src/index.js",
@@ -9,7 +9,8 @@
   "author": "Fabien JUIF <fabien.juif@gmail.com>",
   "scripts": {
     "build": "pika-pack build",
-    "lint": "eslint --cache . --ignore-pattern pkg"
+    "lint": "eslint --cache . --ignore-pattern pkg",
+    "version": "pika-pack build"
   },
   "keywords": [
     "node",
