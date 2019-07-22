@@ -10,6 +10,7 @@
   "repository": "github:fabienjuif/graph-client",
   "author": "Fabien JUIF <fabien.juif@gmail.com>",
   "scripts": {
+    "test": "jest",
     "build": "pika-pack build",
     "lint": "eslint --cache . --ignore-pattern pkg",
     "version": "pika-pack build"
@@ -42,7 +43,8 @@
         "@pika/plugin-standard-pkg",
         {
           "exclude": [
-            "__tests__/**/*"
+            "__tests__/**/*",
+            "**/*spec.js"
           ]
         }
       ],
