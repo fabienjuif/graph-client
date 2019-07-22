@@ -6,6 +6,8 @@
   "esnext": "pkg/dist-src/index.js",
   "main": "pkg/dist-node/index.js",
   "module": "pkg/dist-web/index.js",
+  "homepage": "https://github.com/fabienjuif/graph-client",
+  "repository": "github:fabienjuif/graph-client",
   "author": "Fabien JUIF <fabien.juif@gmail.com>",
   "scripts": {
     "build": "pika-pack build",
