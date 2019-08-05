@@ -30,7 +30,7 @@
     "@pika/pack": "^0.4.0",
     "@pika/plugin-build-node": "^0.4.0",
     "@pika/plugin-build-web": "^0.4.0",
-    "@pika/plugin-standard-pkg": "^0.4.0",
+    "@pika/plugin-standard-pkg": "^0.6.0",
     "coveralls": "^3.0.5",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.1",
