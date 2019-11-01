@@ -14,7 +14,7 @@
 `npm install --save @fabienjuif/graph-client`
 
 ## API
-`import createClient from '@fabienjuif/graph-client`
+`import createClient from '@fabienjuif/graph-client'`
 - `createClient(options: object): Client`: creates and returns a new graphql client
   * `options.url`: **(required)**, the graphql endpoint to query
   * `options.cache`: **(optional, default = undefined)**, the cache implementation to use, it must implement `set(key: string, value: object)` and `get(key: string): object` to be compatible. You can use a `Map` or `lru` package for example.
