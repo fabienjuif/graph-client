@@ -71,6 +71,7 @@ const client = (options = {}) => {
             if (!noCache && cache && !query.trim().startsWith('mutation')) cache.set(body, res.data)
             resolve(res.data)
           })
+          .catch(reject)
       }
 
       if (token) {
